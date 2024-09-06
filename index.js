@@ -1,8 +1,8 @@
 //
-// Carousel
+// Gallery carousel
 //
 
-const carousel = document.getElementById('collections');
+const gallery = document.getElementById('gallery');
 !function () {
     let isDragging = false;
     let startPos = 0;
@@ -23,7 +23,7 @@ const carousel = document.getElementById('collections');
         isDragging = true;
         startPos = getPositionX(event);
         animationID = requestAnimationFrame(animation);
-        carousel.classList.add('grabbing');
+        gallery.classList.add('grabbing');
     };
 
     // TranslateX based on mouse position difference
@@ -38,18 +38,18 @@ const carousel = document.getElementById('collections');
         isDragging = false;
         cancelAnimationFrame(animationID);
         prevTranslate = currentTranslate;
-        carousel.classList.remove('grabbing');
+        gallery.classList.remove('grabbing');
     };
 
     // Add event listeners for desktop and mobile
-    carousel.addEventListener('mousedown', touchStart);
-    carousel.addEventListener('touchstart', touchStart);
-    carousel.addEventListener('mousemove', touchMove);
-    carousel.addEventListener('touchmove', touchMove);
-    carousel.addEventListener('mouseup', touchEnd);
-    carousel.addEventListener('touchend', touchEnd);
-    carousel.addEventListener('mouseleave', touchEnd);
-    carousel.addEventListener('touchcancel', touchEnd);
+    gallery.addEventListener('mousedown', touchStart);
+    gallery.addEventListener('touchstart', touchStart);
+    gallery.addEventListener('mousemove', touchMove);
+    gallery.addEventListener('touchmove', touchMove);
+    gallery.addEventListener('mouseup', touchEnd);
+    gallery.addEventListener('touchend', touchEnd);
+    gallery.addEventListener('mouseleave', touchEnd);
+    gallery.addEventListener('touchcancel', touchEnd);
 
 }();
 
@@ -75,39 +75,48 @@ const modal = document.getElementById('imageModal');
 }();
 
 //
-// Load animation
+// Create DOM elements
 //
 
 !function () {
-    imageCollections.forEach((collection, c) => {
+    galleryContent.forEach((collection, c) => {
         // Create circle
-        const carouselCircle = document.createElement("div");
-        carouselCircle.classList.add("story-item");
+        const collectionItem = document.createElement("div");
+        collectionItem.classList.add("collection-item");
+
+        const collectionPreviewContainer = document.createElement("div");
+        collectionPreviewContainer.classList.add("collection-preview-container");
+        collectionItem.appendChild(collectionPreviewContainer);
+
+        const collectionTitle = document.createElement("p");
+        collectionTitle.classList.add("collection-title", "not-selectable");
+        collectionTitle.textContent = collection.name;
+        collectionItem.appendChild(collectionTitle);
 
         if (!collection.useImagesAsPreview) {
             // Create circle image
-            const itemImage = document.createElement("img");
-            itemImage.classList.add("not-selectable");
-            itemImage.src = collection.previewImage;
-            itemImage.alt = collection.name;
-            carouselCircle.appendChild(itemImage);
+            const previewImage = document.createElement("img");
+            previewImage.classList.add("not-selectable");
+            previewImage.src = collection.previewImage;
+            previewImage.alt = collection.name;
+            collectionPreviewContainer.appendChild(previewImage);
         } else {
             collection.images.forEach((image, i) => {
                 // Create circle image
-                const itemImage = document.createElement("img");
-                itemImage.classList.add("not-selectable", "fade");
-                itemImage.style.animationDelay = `-${(i * 4) - (c * 0.1)}s`;
-                itemImage.src = image;
-                carouselCircle.appendChild(itemImage);
+                const previewImage = document.createElement("img");
+                previewImage.classList.add("fade", "not-selectable");
+                previewImage.style.animationDelay = `-${(i * 4) - (c * 0.1)}s`;
+                previewImage.src = image;
+                collectionPreviewContainer.appendChild(previewImage);
             });
         }
 
         // Make it clickable
-        carouselCircle.addEventListener("click", () => {
+        collectionPreviewContainer.addEventListener("click", () => {
             clearCollectionContent();
             addCollectionContent(collection.images);
         });
-        carousel.appendChild(carouselCircle);
+        gallery.appendChild(collectionItem);
     });
 }();
 
@@ -145,7 +154,6 @@ function addCollectionContent(images) {
 
 function addModalOnClick(element) {
     const modalImage = document.getElementById('modalImage');
-
     element.addEventListener('click', (event) => {
         if (event.target.tagName === 'IMG') {
             modalImage.src = event.target.src;
@@ -159,21 +167,20 @@ function addModalOnClick(element) {
 // 
 
 !function () {
-    var content = document.querySelector('.story-carousel'),
-        wrapper = document.querySelector('.container'),
-        shadowTop = document.querySelector('.shadow--top'),
-        shadowBottom = document.querySelector('.shadow--bottom'),
-        contentScrollHeight = content.scrollWidth - wrapper.offsetWidth;
+    var wrapper = document.querySelector('.container'),
+        shadowLeft = document.querySelector('.shadow--left'),
+        shadowRight = document.querySelector('.shadow--right'),
+        contentScrollHeight = gallery.scrollWidth - wrapper.offsetWidth;
 
     if (contentScrollHeight > 0) {
-        content.addEventListener('scroll', function () {
+        gallery.addEventListener('scroll', function () {
             var currentScroll = this.scrollLeft / (contentScrollHeight);
-            shadowTop.style.opacity = currentScroll;
-            shadowBottom.style.opacity = 1 - currentScroll;
+            shadowLeft.style.opacity = currentScroll;
+            shadowRight.style.opacity = 1 - currentScroll;
         });
     } else {
-        shadowTop.style.opacity = 0;
-        shadowBottom.style.opacity = 0;
+        shadowLeft.style.opacity = 0;
+        shadowRight.style.opacity = 0;
     }
 }();
 

@@ -1,4 +1,4 @@
-const imageCollections = [
+const galleryContent = [
     {
         id: 1,
         name: "Paintings",

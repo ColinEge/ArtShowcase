@@ -40,14 +40,14 @@
     background: red;
 }
 
-.shadow--top {
+.shadow--left {
     left: 0;
     background: -webkit-linear-gradient(270deg, rgba(0, 0, 0, 0.35), transparent);
     background: linear-gradient(90deg, rgba(0, 0, 0, 0.35), transparent);
     opacity: 0;
 }
 
-.shadow--bottom {
+.shadow--right {
     right: 0;
     background: -webkit-linear-gradient(90deg, rgba(0, 0, 0, 0.35), transparent);
     background: linear-gradient(270deg, rgba(0, 0, 0, 0.35), transparent);
@@ -110,7 +110,7 @@
 }
 
 /* Make our images side by side with a light drop shadow and transition for animated scrolling */
-.story-item {
+.collection-preview-container {
     flex: none;
     width: 100px;
     height: 100px;
@@ -127,18 +127,18 @@
     position: relative;
 }
 
-.story-item:hover {
+.collection-preview-container:hover {
     transform: scale(1.1);
 }
 
-.story-item img {
+.collection-preview-container img {
     position: absolute;
     top: 0;
     left: 0;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-    .story-item img.fade {
+    .collection-preview-container img.fade {
         -webkit-animation-name: fade;
         -webkit-animation-iteration-count: infinite;
         -webkit-animation-duration: 6s;
@@ -151,7 +151,7 @@
 
 
 /* Make our images circles and change cursor to show it's selectable */
-.story-item img {
+.collection-preview-container img {
     border-radius: 50%;
     width: 100%;
     height: 100%;
@@ -160,8 +160,20 @@
 }
 
 /* Make your selection smaller for feedback */
-.story-item:active {
+.collection-preview-container:active {
     transform: scale(0.95);
+}
+
+.collection-title {
+    font-size: 0.8rem;
+    color: #666;
+    margin-top: 0.2rem;
+}
+
+.collection-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 /* This class makes it so some items can't be selected */
