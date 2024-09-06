@@ -56,6 +56,20 @@ body {
     user-select: none;
 }
 
+.animate-height {
+    animation: animate-height 30s forwards;
+}
+
+@keyframes animate-height {
+    90% {
+        height: 30vh;
+    }
+
+    100% {
+        height: 0vh;
+    }
+}
+
 .gif-container {
     display: flex;
     justify-content: center;
