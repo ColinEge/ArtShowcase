@@ -79,43 +79,35 @@ const modal = document.getElementById('imageModal');
 //
 
 !function () {
-    document.addEventListener('DOMContentLoaded', () => {
-        const mainContent = document.querySelector('.main-content');
-
-        // Get the full height of the main content
-        const contentHeight = mainContent.scrollHeight;
-
-        // Set the height to the full height, allowing the transition to animate it
-        mainContent.style.height = contentHeight + 'px';
-
-        // After the transition, make the content fully visible and reset height to auto
-        mainContent.addEventListener('transitionend', () => {
-            mainContent.style.height = 'auto';
-            mainContent.classList.add('visible'); // Allow content to be fully seen
-            document.body.style.overflow = 'auto'; // Enable scrolling
-        }, { once: true });
-    });
-}();
-
-!function () {
     imageCollections.forEach((collection) => {
         // Create circle
         const carouselCircle = document.createElement("div");
         carouselCircle.classList.add("story-item");
 
-        // Create circle image
-        const itemImage = document.createElement("img");
-        itemImage.classList.add("not-selectable");
-        itemImage.src = collection.previewImage;
-        itemImage.alt = collection.name;
-        carouselCircle.appendChild(itemImage);
+        if (!collection.useImagesAsPreview) {
+            // Create circle image
+            const itemImage = document.createElement("img");
+            itemImage.classList.add("not-selectable");
+            itemImage.src = collection.previewImage;
+            itemImage.alt = collection.name;
+            carouselCircle.appendChild(itemImage);
+        } else {
+            collection.images.forEach((image, i) => {
+                // Create circle image
+                const itemImage = document.createElement("img");
+                itemImage.classList.add("not-selectable", "fade");
+                itemImage.style.animationDelay = `-${i * 4}s`;
+                itemImage.src = image;
+                carouselCircle.appendChild(itemImage);
+            });
+        }
 
         // Make it clickable
         carouselCircle.addEventListener("click", () => {
             clearCollectionContent();
             addCollectionContent(collection.images);
         });
-        document.getElementById("collections").appendChild(carouselCircle);
+        carousel.appendChild(carouselCircle);
     });
 }();
 
