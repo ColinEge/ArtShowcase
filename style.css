@@ -57,7 +57,7 @@ body {
 }
 
 .animate-height {
-    animation: animate-height 30s forwards;
+    animation: animate-height 9s forwards;
 }
 
 @keyframes animate-height {
