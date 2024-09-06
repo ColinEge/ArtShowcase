@@ -61,25 +61,26 @@
         <form class="form content" action="https://api.web3forms.com/submit" method="POST">
             <input type="hidden" name="access_key" value="c9f9b4e9-f4f5-418b-ab0e-96a1359b6d73">
             <div class="field">
-                <label class="label">Name</label>
+                <label for="name-field" class="label">Name</label>
                 <div class="control">
-                    <input required name="name" class="input" type="text" placeholder="Text input">
+                    <input autocomplete="name" id="name-field" required name="name" class="input" type="text"
+                        placeholder="Text input">
                 </div>
             </div>
 
             <div class="field">
-                <label class="label">Email</label>
+                <label for="email-field" class="label">Email</label>
                 <div class="control">
-                    <input required class="input" type="email" name="email" placeholder="Email input"
-                        value="me@example.com">
+                    <input autocomplete="email" id="email-field" required class="input" type="email" name="email"
+                        placeholder="Email input" value="me@example.com">
                 </div>
             </div>
 
             <div class="field">
-                <label class="label">Subject</label>
+                <label for="subject-field" class="label">Subject</label>
                 <div class="control">
                     <div class="select">
-                        <select required name="subject">
+                        <select id="subject-field" required name="subject">
                             <option disabled value="" selected hidden>Select dropdown</option>
                             <option>Commission</option>
                             <option>Comment</option>
@@ -91,9 +92,10 @@
             </div>
 
             <div class="field">
-                <label class="label">Message</label>
+                <label for="message-field" class="label">Message</label>
                 <div class="control">
-                    <textarea required name="message" class="textarea" placeholder="Textarea"></textarea>
+                    <textarea id="message-field" required name="message" class="textarea"
+                        placeholder="Textarea"></textarea>
                 </div>
             </div>
 
