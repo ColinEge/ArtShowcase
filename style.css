@@ -1,63 +1,20 @@
 @import 'https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css';
 
-body {
-    overflow: hidden;
-}
+/*  */
+/* Animated gif */
+/*  */
 
-/* Image container, just holds images and hides ones that shouldn't be visible */
-.story-carousel {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    gap: 1rem;
-    padding: 1rem;
-    -webkit-overflow-scrolling: touch;
-}
-
-/* Make our images side by side with a light drop shadow and transition for animated scrolling */
-.story-item {
-    flex: none;
-    width: 100px;
-    height: 100px;
-    background-color: #eee;
-    border-radius: 50%;
-    scroll-snap-align: center;
+.gif-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.2rem;
-    color: #333;
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
-    transition: transform 0.2s ease;
+    padding: 10px;
 }
 
-.story-item:hover {
-    transform: scale(1.1);
-}
-
-/* Make our images circles and change cursor to show it's selectable */
-.story-item img {
-    border-radius: 50%;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    cursor: pointer;
-}
-
-/* Make your selection smaller for feedback */
-.story-item:active {
-    transform: scale(0.95);
-}
-
-/* This class makes it so some items can't be selected */
-.not-selectable {
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-
-.animate-height {
-    animation: animate-height 9s forwards;
+@media (prefers-reduced-motion: no-preference) {
+    .animate-height {
+        animation: animate-height 9s forwards;
+    }
 }
 
 @keyframes animate-height {
@@ -70,28 +27,10 @@ body {
     }
 }
 
-.gif-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-}
-
-.main-content {
-    height: 0;
-    overflow: hidden;
-    transition: height 1s ease-out;
-}
-
-.main-content.visible {
-    overflow: visible;
-    /* Allows content to be seen when fully revealed */
-}
-
-
-
-
+/*  */
 /* Carousel Shadow */
+/*  */
+
 .shadow {
     position: absolute;
     top: 0;
@@ -114,7 +53,9 @@ body {
     background: linear-gradient(270deg, rgba(0, 0, 0, 0.35), transparent);
 }
 
+/*  */
 /* Copy Tooltip */
+/*  */
 
 .tooltip {
     position: relative;
@@ -154,10 +95,40 @@ body {
     opacity: 1;
 }
 
+/*  */
 /* style.css */
+/*  */
 
+/* Image container, just holds images and hides ones that shouldn't be visible */
+.story-carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 1rem;
+    padding: 1rem;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Make our images side by side with a light drop shadow and transition for animated scrolling */
 .story-item {
+    flex: none;
+    width: 100px;
+    height: 100px;
+    background-color: #eee;
+    border-radius: 50%;
+    scroll-snap-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    color: #333;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease;
     position: relative;
+}
+
+.story-item:hover {
+    transform: scale(1.1);
 }
 
 .story-item img {
@@ -166,13 +137,38 @@ body {
     left: 0;
 }
 
-.story-item img.fade {
-    -webkit-animation-name: fade;
-    -webkit-animation-iteration-count: infinite;
-    -webkit-animation-duration: 6s;
-    animation-name: fade;
-    animation-iteration-count: infinite;
-    animation-duration: 6s;
+@media (prefers-reduced-motion: no-preference) {
+    .story-item img.fade {
+        -webkit-animation-name: fade;
+        -webkit-animation-iteration-count: infinite;
+        -webkit-animation-duration: 6s;
+        animation-name: fade;
+        animation-iteration-count: infinite;
+        animation-duration: 6s;
+    }
+}
+
+
+
+/* Make our images circles and change cursor to show it's selectable */
+.story-item img {
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+/* Make your selection smaller for feedback */
+.story-item:active {
+    transform: scale(0.95);
+}
+
+/* This class makes it so some items can't be selected */
+.not-selectable {
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 @-webkit-keyframes fade {
@@ -217,18 +213,4 @@ body {
     100% {
         opacity: 0;
     }
-}
-
-#f1 {
-    background-color: lightblue;
-}
-
-#f2 {
-    -webkit-animation-delay: -4s;
-    background-color: yellow;
-}
-
-#f3 {
-    -webkit-animation-delay: -2s;
-    background-color: lightgreen;
 }

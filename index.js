@@ -2,7 +2,7 @@
 // Carousel
 //
 
-const carousel = document.querySelector('.story-carousel');
+const carousel = document.getElementById('collections');
 !function () {
     let isDragging = false;
     let startPos = 0;
@@ -79,7 +79,7 @@ const modal = document.getElementById('imageModal');
 //
 
 !function () {
-    imageCollections.forEach((collection) => {
+    imageCollections.forEach((collection, c) => {
         // Create circle
         const carouselCircle = document.createElement("div");
         carouselCircle.classList.add("story-item");
@@ -96,7 +96,7 @@ const modal = document.getElementById('imageModal');
                 // Create circle image
                 const itemImage = document.createElement("img");
                 itemImage.classList.add("not-selectable", "fade");
-                itemImage.style.animationDelay = `-${i * 4}s`;
+                itemImage.style.animationDelay = `-${(i * 4) - (c * 0.1)}s`;
                 itemImage.src = image;
                 carouselCircle.appendChild(itemImage);
             });
